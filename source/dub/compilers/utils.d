@@ -334,6 +334,7 @@ NativePath generatePlatformProbeFile()
 		string determineCompiler() { %5$s }
 
 		}.format(probeBeginMark, probeEndMark, platformCheck, archCheck, compilerCheck);
+	{ import std.stdio; stderr.writeln(probe); }
 
 	auto path = getTempFile("dub_platform_probe", ".d");
 	auto fil = openFile(path, FileMode.createTrunc);

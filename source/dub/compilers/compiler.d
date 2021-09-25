@@ -130,9 +130,10 @@ interface Compiler {
 
 		auto fil = generatePlatformProbeFile();
 
-		auto result = executeShell(escapeShellCommand(compiler_binary ~ args ~ fil.toNativeString()));
+		auto testArgs = compiler_binary ~ args ~ fil.toNativeString();
+		auto result = executeShell(escapeShellCommand(testArgs));
 		enforce(result.status == 0, format("Failed to invoke the compiler %s to determine the build platform: %s",
-				compiler_binary, result.output));
+				testArgs, result.output));
 
 		auto build_platform = readPlatformJsonProbe(result.output);
 		build_platform.compilerBinary = compiler_binary;
