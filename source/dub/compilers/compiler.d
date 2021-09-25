@@ -131,7 +131,7 @@ interface Compiler {
 		auto fil = generatePlatformProbeFile();
 
 		auto testArgs = compiler_binary ~ args ~ fil.toNativeString();
-		auto result = executeShell(escapeShellCommand(testArgs));
+		auto result = execute(testArgs);
 		enforce(result.status == 0, format("Failed to invoke the compiler %s to determine the build platform: %s",
 				testArgs, result.output));
 
